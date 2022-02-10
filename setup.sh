@@ -138,8 +138,9 @@ echo "#!/bin/sh
 systemctl stop thoughtd
 sudo rm /root/.thoughtcore/evodb/ -r
 sudo rm /root/.thoughtcore/blocks/ -r
-sudo rm /root/.thoughtcore/chainstate/ -r" > /usr/bin/resetminer
-systemctl start thoughtd
+sudo rm /root/.thoughtcore/chainstate/ -r
+systemctl start thoughtd" > /usr/bin/resetminer
+chmod +x /usr/bin/resetminer
 ##########################################################################################
 #Execute rechten goed zetten (is beetje open maar werkt)
 chmod +x /root/services/* -R
