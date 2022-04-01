@@ -22,7 +22,7 @@ wget https://github.com/thoughtnetwork/thought-wallet/raw/master/linux/thought-0
 #
 tar -zxvf thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
 #
-./thoughtcore-0.18.2/bin/thoughtd -daemon
+./thoughtcore/bin/thoughtd -daemon
 #
 wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
 #
@@ -121,7 +121,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/miner1.service
 #########################################################################################
 touch /root/services/thoughtd-service
 echo "#!/bin/sh
-/root/thoughtcore-0.18.2/bin/thoughtd" > /root/services/thoughtd-service
+/root/thoughtcore/bin/thoughtd" > /root/services/thoughtd-service
 #########################################################################################
 touch /root/services/miner-service
 echo "#!/bin/sh
@@ -130,7 +130,7 @@ sudo /usr/bin/java -jar /root/miner.jar --config /root/miner.conf" > /root/servi
 rm /usr/bin/getinfo
 touch /usr/bin/getinfo
 echo "#!/bin/sh
-sudo /root/thoughtcore-0.18.2/bin/thought-cli getinfo" > /usr/bin/getinfo
+sudo /root/thoughtcore/bin/thought-cli getinfo" > /usr/bin/getinfo
 ##########################################################################################
 rm /usr/bin/resetminer
 touch /usr/bin/resetminer
