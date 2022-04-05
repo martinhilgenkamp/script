@@ -18,6 +18,10 @@ apt-get install cockpit openjdk-11-jdk -y
 DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 #
 #
+rm /root/thoughtcore-0.18.1 -r
+rm /root/snap -r
+rm /root/thoughtcore-0.18.1-x86_64-pc-linux-gnu.tar.gz -r
+#
 wget https://github.com/thoughtnetwork/thought-wallet/raw/master/linux/thought-0.18.2/thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
 #
 tar -zxvf thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
