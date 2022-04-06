@@ -1,7 +1,31 @@
-#!/bin/sh
-echo "Waar moet de money heen?:"
-read COINBASE
-echo "Translating address to Martins Wallet...."
+#!/bin/bash
+FILE=/root/miner.conf
+if [ -f "$FILE" ]; then
+    echo "$FILE exists."
+    read -t 5 -p "Miner Config Exist on the system, oude instellingen gebruiken? [y/n]" yn
+    case $yn in
+                [yY][eE][sS]|[yY])
+                echo "Oude miner.conf word hergebruikt"
+                ;;
+            [nN][oO]|[nN])
+                        read -p "Waar moet de money heen ?" COINBASE
+                        ######################################
+                        touch /root/miner.conf
+                        echo "host = localhost
+port = 10617
+user = martin
+password = martin
+coinbase-addr = $COINBASE" > /root/miner.conf
+                        #
+                        ;;
+        *)
+                echo "Oude miner.conf word hergebruikt"
+                ;;
+        esac
+else
+    echo "$FILE does not exist."
+fi
+#########################################
 /bin/sleep 5
 cd
 systemctl stop thoughtd
@@ -158,4 +182,17 @@ systemctl enable miner1
 systemctl start thoughtd
 systemctl start miner
 systemctl start miner1
-reboot now
+
+read -t 5 -p "Miner Config Exist on the system, oude instellingen gebruiken? [y/n]" yn
+    case $yn in
+        [yY][eE][sS]|[yY])
+		    reboot now
+        ;;
+        [nN][oO]|[nN])
+            echo "Miner update complete, laten de mine goden met u zijn!"
+		;;
+        *)
+            echo "Niet begrepen vaar eigen wind wel."
+			/bin/sleep 5
+        ;;
+    esac
