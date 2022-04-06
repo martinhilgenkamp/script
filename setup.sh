@@ -183,7 +183,7 @@ systemctl start thoughtd
 systemctl start miner
 systemctl start miner1
 
-read -t 5 -p "Miner Config Exist on the system, oude instellingen gebruiken? [y/n]" yn
+read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
     case $yn in
         [yY][eE][sS]|[yY])
 		    reboot now
@@ -192,6 +192,7 @@ read -t 5 -p "Miner Config Exist on the system, oude instellingen gebruiken? [y/
             echo "Miner update complete, laten de mine goden met u zijn!"
 		;;
         *)
+			echo "" 
             echo "Niet begrepen vaar eigen wind wel."
 			/bin/sleep 5
         ;;
