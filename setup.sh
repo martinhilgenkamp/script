@@ -71,15 +71,6 @@ mv jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar miner.jar
 echo "server=1
 rpcuser=martin
 rpcpassword=martin" > /root/.thoughtcore/thought.conf
-#
-######################################
-touch /root/miner.conf
-echo "host = localhost
-port = 10617
-user = martin
-password = martin
-coinbase-addr = $COINBASE" > /root/miner.conf
-#
 #################################
 #Installatie
 #Begin uit de root.
