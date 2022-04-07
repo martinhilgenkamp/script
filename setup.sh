@@ -194,6 +194,7 @@ read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
         *)
 			echo "" 
             echo "Niet begrepen vaar eigen wind wel."
-			/bin/sleep 5
+	    /bin/sleep 5
+	    reboot now
         ;;
     esac
