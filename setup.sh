@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 FILE=/root/miner.conf
 if [ -f "$FILE" ]; then
     echo "$FILE exists."
