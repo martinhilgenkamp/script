@@ -24,6 +24,15 @@ coinbase-addr = $COINBASE" > /root/miner.conf
         esac
 else
     echo "$FILE does not exist."
+    read -p "Waar moet de money heen ?" COINBASE
+                        ######################################
+                        touch /root/miner.conf
+                        echo "host = localhost
+port = 10617
+user = martin
+password = martin
+coinbase-addr = $COINBASE" > /root/miner.conf
+                        #
 fi
 #########################################
 /bin/sleep 5
