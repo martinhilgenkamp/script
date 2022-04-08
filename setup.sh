@@ -82,7 +82,7 @@ rpcpassword=martin" > /root/.thoughtcore/thought.conf
 mkdir services 
 #Services maken
 #####################################################################################
-rm /etc/systemd/system/thoughtd.service
+test -f /etc/systemd/system/thoughtd.service && rm /etc/systemd/system/thoughtd.service
 touch /etc/systemd/system/thoughtd.service
 echo "[Unit]
 Description=Thought Network Deamon
@@ -106,7 +106,7 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/thoughtd.service
 #######################################################################################
-rm /etc/systemd/system/miner.service
+test -f /etc/systemd/system/miner.service && rm /etc/systemd/system/miner.service
 touch /etc/systemd/system/miner.service
 echo "[Unit]
 Description=Thought Miner
@@ -128,8 +128,8 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/miner.service
-
-rm /etc/systemd/system/miner1.service
+########################################################################################
+test -f /etc/systemd/system/miner1.service && rm /etc/systemd/system/miner1.service
 touch /etc/systemd/system/miner1.service
 echo "[Unit]
 Description=Thought Miner
@@ -152,20 +152,22 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/miner1.service
 #########################################################################################
+test -f /root/services/thoughtd-service && rm /root/services/thoughtd-service
 touch /root/services/thoughtd-service
 echo "#!/bin/sh
 /root/thoughtcore/bin/thoughtd" > /root/services/thoughtd-service
 #########################################################################################
+test -f /root/services/miner-service && rm /root/services/miner-service
 touch /root/services/miner-service
 echo "#!/bin/sh
 sudo /usr/bin/java -jar /root/miner.jar --config /root/miner.conf" > /root/services/miner-service
 #########################################################################################
-rm /usr/bin/getinfo
+test -f /usr/bin/getinfo && rm /usr/bin/getinfo
 touch /usr/bin/getinfo
 echo "#!/bin/sh
 sudo /root/thoughtcore/bin/thought-cli getinfo" > /usr/bin/getinfo
 ##########################################################################################
-rm /usr/bin/resetminer
+test -f /usr/bin/resetminer && rm /usr/bin/resetminer
 touch /usr/bin/resetminer
 echo "#!/bin/sh
 systemctl stop thoughtd
