@@ -154,22 +154,22 @@ WantedBy=multi-user.target" > /etc/systemd/system/miner1.service
 #########################################################################################
 test -f /root/services/thoughtd-service && rm /root/services/thoughtd-service
 touch /root/services/thoughtd-service
-echo "#!/bin/sh
+echo "#!/bin/bash
 /root/thoughtcore/bin/thoughtd" > /root/services/thoughtd-service
 #########################################################################################
 test -f /root/services/miner-service && rm /root/services/miner-service
 touch /root/services/miner-service
-echo "#!/bin/sh
+echo "#!/bin/bash
 sudo /usr/bin/java -jar /root/miner.jar --config /root/miner.conf" > /root/services/miner-service
 #########################################################################################
 test -f /usr/bin/getinfo && rm /usr/bin/getinfo
 touch /usr/bin/getinfo
-echo "#!/bin/sh
+echo "#!/bin/bash
 sudo /root/thoughtcore/bin/thought-cli getinfo" > /usr/bin/getinfo
 ##########################################################################################
 test -f /usr/bin/resetminer && rm /usr/bin/resetminer
 touch /usr/bin/resetminer
-echo "#!/bin/sh
+echo "#!/bin/bash
 systemctl stop thoughtd
 sudo rm /root/.thoughtcore/evodb/ -r
 sudo rm /root/.thoughtcore/blocks/ -r
@@ -186,9 +186,7 @@ systemctl daemon-reload
 systemctl enable thoughtd
 systemctl enable miner
 systemctl enable miner1
-systemctl start thoughtd
-systemctl start miner
-systemctl start miner1
+
 
 read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
     case $yn in
@@ -197,6 +195,9 @@ read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
         ;;
         [nN][oO]|[nN])
             echo "Miner update complete, laten de mine goden met u zijn!"
+			systemctl start thoughtd
+			systemctl start miner
+			systemctl start miner1
 		;;
         *)
 			echo "" 
