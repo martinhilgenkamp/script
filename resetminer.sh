@@ -13,6 +13,9 @@ rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
 
+echo "Old files removed"
+/bin/sleep 3
+
 mv /root/evodb/ /root/.thoughtcore/evodb/
 mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
