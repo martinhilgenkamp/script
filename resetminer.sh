@@ -13,9 +13,9 @@ rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
 
-mv /root/evodb/ /root/.thoughtcore/evodb/ -r
-mv /root/blocks/ /root/.thoughtcore/blocks/ -r
-mv /root/chainstate/ /root/.thoughtcore/chainstate/ -r
+mv /root/evodb/ /root/.thoughtcore/evodb/
+mv /root/blocks/ /root/.thoughtcore/blocks/
+mv /root/chainstate/ /root/.thoughtcore/chainstate/
 
 systemctl start thoughtd
 journalctl -30 -u thoughtd
