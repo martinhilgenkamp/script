@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 cd /root
-wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
+wget http://192.168.250.65/thought-chain.tar.gz
 tar -zxvf thought-chain.tar.gz
 
 systemctl stop thoughtd
