@@ -186,7 +186,9 @@ systemctl daemon-reload
 systemctl enable thoughtd
 systemctl enable miner
 systemctl enable miner1
-
+#######################################################################################
+#Allow Root login
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
     case $yn in
