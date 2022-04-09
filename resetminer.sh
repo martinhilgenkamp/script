@@ -24,6 +24,6 @@ mv /root/chainstate/ /root/.thoughtcore/chainstate/
 echo "Blockchain recovered"
 echo "Starting Thoughtd Service"
 systemctl start thoughtd
-echo "Thoughtd Service Started
+echo "Thoughtd Service Started"
 echo "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
