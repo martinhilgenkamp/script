@@ -6,7 +6,7 @@ fi
 
 cd /root
 echo "Downloading Bootstrap"
-wget http://192.168.250.65/thought-chain.tar.gz
+wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
 echo "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
 echo "Stopping services"
