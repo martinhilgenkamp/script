@@ -7,8 +7,8 @@ fi
 cd /root
 echo "Downloading Bootstrap"
 
-#wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
-wget http://192.168.250.65/thought-chain.tar.gz
+wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
+#wget http://192.168.250.65/thought-chain.tar.gz
 
 
 echo "Extracting Bootstrap"
