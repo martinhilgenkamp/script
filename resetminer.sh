@@ -7,7 +7,7 @@ fi
 cd /root
 
 echo "Cleaning up"
-rm "*.tar.gz"
+rm *.tar.gz -rf
 
 echo "Stopping services"
 systemctl stop thoughtd
