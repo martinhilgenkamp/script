@@ -4,33 +4,36 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+GRN='\e[32m'
+CYN='\e[36m'
+END='\e[0m'
+
 cd /root
 
-echo "Cleaning up"
+echo "${GRN}Cleaning up${END}"
 rm *.tar.gz -rf
 
-echo "Stopping services"
+echo "${GRN}Stopping services${END}"
 systemctl stop thoughtd
-echo "Removing chain Files"
+echo "${GRN}Removing chain Files${END}"
 rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
-echo "Blockchain removed"
+echo "${GRN}Blockchain removed${END}"
 
-echo "Downloading Bootstrap file"
+echo "${GRN}Downloading Bootstrap file${END}"
 wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
 #wget http://192.168.250.65/thought-chain.tar.gz
 
-echo "Extracting Bootstrap"
+echo "${GRN}Extracting Bootstrap${END}"
 tar -zxf thought-chain.tar.gz
 
-echo "Rebuilding blockchain"
+echo "${GRN}Rebuilding blockchain${END}"
 mv /root/evodb/ /root/.thoughtcore/evodb/
 mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
-echo "Blockchain recovered"
-echo "Starting Thoughtd Service"
+echo "${GRN}Blockchain recovered{END}"
+echo "${GRN}Starting Thoughtd Service{END}"
 systemctl start thoughtd
-echo "Thoughtd Service Started"
-echo "Removing bootstrap file"
+echo "${GRN}Removing bootstrap file${END}"
 rm /root/thought-chain.tar.gz -f
