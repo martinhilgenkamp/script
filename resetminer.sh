@@ -56,17 +56,6 @@ function white(){
 }
 cd /root
 
-read -t 5 -p "Lokale chain downloaden? [y/n]" yn
-case $yn in
-     [yY][eE][sS]|[yY])
-     echo "Lokale chain word gedownload"
-     wget http://192.168.250.167/thought-chain.tar.gz
-;;
-     [nN][oO]|[nN])
-     echo "Online chain word gedownload"
-     wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
-;;
-
 green "Cleaning up"
 rm *.tar.gz -rf
 
@@ -80,7 +69,7 @@ green "Blockchain removed"
 
 green "Downloading Bootstrap file"
 
-#wget http://192.168.250.65/thought-chain.tar.gz
+wget http://192.168.250.167/thought-chain.tar.gz
 
 green "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
