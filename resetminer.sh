@@ -58,6 +58,19 @@ cd /root
 
 green "Cleaning up"
 rm *.tar.gz -rf
+sleep 10
+green "Adding Nodes{END}"
+/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+
 
 red "Stopping services"
 systemctl stop thoughtd
@@ -87,17 +100,3 @@ red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
 green "--------------------------"
 green "success"
-
-sleep 15
-green "Adding Nodes{END}"
-/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
-
