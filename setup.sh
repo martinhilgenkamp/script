@@ -65,7 +65,7 @@ wget https://github.com/thoughtnetwork/thought-wallet/blob/master/linux/thought-
 #
 tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
-./thoughtcore/bin/thoughtd -daemon
+/root/thoughtcore/bin/thoughtd -daemon
 #
 wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
 #
