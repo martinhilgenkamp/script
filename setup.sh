@@ -59,10 +59,11 @@ DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 rm /root/thoughtcore-0.18.1 -r
 rm /root/snap -r
 rm /root/thoughtcore-0.18.1-x86_64-pc-linux-gnu.tar.gz -r
+rm /root/thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
 #
-wget https://github.com/thoughtnetwork/thought-wallet/raw/master/linux/thought-0.18.2/thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
+wget https://github.com/thoughtnetwork/thought-wallet/blob/master/linux/thought-0.18.3/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
-tar -zxvf thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
+tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 ./thoughtcore/bin/thoughtd -daemon
 #
@@ -189,6 +190,19 @@ systemctl enable miner1
 #######################################################################################
 #Allow Root login
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+
+
 
 read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
     case $yn in
