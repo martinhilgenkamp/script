@@ -191,6 +191,10 @@ systemctl enable miner1
 #Allow Root login
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
+
+sleep 15
+
+
 /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
