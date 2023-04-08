@@ -79,6 +79,19 @@ mv /root/evodb/ /root/.thoughtcore/evodb/
 mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
 green "Blockchain recovered{END}"
+
+green "Adding Nodes{END}"
+/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+
 green "Starting Thoughtd Service{END}"
 systemctl start thoughtd
 red "Removing bootstrap file"
