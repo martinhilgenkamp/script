@@ -80,6 +80,15 @@ mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
 green "Blockchain recovered{END}"
 
+
+green "Starting Thoughtd Service{END}"
+systemctl start thoughtd
+red "Removing bootstrap file"
+rm /root/thought-chain.tar.gz -f
+green "--------------------------"
+green "success"
+
+sleep 15
 green "Adding Nodes{END}"
 /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
@@ -92,9 +101,3 @@ green "Adding Nodes{END}"
 /root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
 
-green "Starting Thoughtd Service{END}"
-systemctl start thoughtd
-red "Removing bootstrap file"
-rm /root/thought-chain.tar.gz -f
-green "--------------------------"
-green "success"
