@@ -211,10 +211,10 @@ sleep 15
 
 
 
-read -t 5 -p "Systeem opnieuw opstarten? [y/n]" yn
+read -t 5 -p "Reset Miner? [y/n]" yn
     case $yn in
         [yY][eE][sS]|[yY])
-		    reboot now
+		    /root/script/resetminer.sh
         ;;
         [nN][oO]|[nN])
             echo "Miner update complete, laten de mine goden met u zijn!"
