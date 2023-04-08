@@ -60,9 +60,12 @@ rm /root/thoughtcore-0.18.1 -r
 rm /root/snap -r
 rm /root/thoughtcore-0.18.1-x86_64-pc-linux-gnu.tar.gz -r
 rm /root/thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
+rm /root/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
+sleep 1
 wget https://github.com/thoughtnetwork/thought-wallet/blob/master/linux/thought-0.18.3/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
+sleep 2
 tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 /root/thoughtcore/bin/thoughtd -daemon
