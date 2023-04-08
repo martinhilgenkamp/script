@@ -100,3 +100,7 @@ red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
 green "--------------------------"
 green "success"
+
+
+sleep 10
+htop
