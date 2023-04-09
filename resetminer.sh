@@ -82,7 +82,8 @@ green "Blockchain removed"
 
 green "Downloading Bootstrap file"
 
-wget http://192.168.250.167/thought-chain.tar.gz
+wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
+#wget http://192.168.250.167/thought-chain.tar.gz
 
 green "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
