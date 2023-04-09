@@ -103,4 +103,4 @@ green "success"
 
 
 sleep 10
-htop
+reboot now
