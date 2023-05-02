@@ -69,7 +69,7 @@ sleep 2
 tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 /root/thoughtcore/bin/thoughtd -daemon
-sleep 5
+sleep 20
 #
 wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
 #
