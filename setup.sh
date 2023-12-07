@@ -225,8 +225,8 @@ read -t 5 -p "Reset Miner? [y/n]" yn
 		;;
         *)
 			echo "" 
-            echo "Niet begrepen vaar eigen wind wel."
-	    /bin/sleep 5
+	    /bin/sleep 25
+     	    echo "Niet begrepen vaar eigen wind wel."
 	    /root/script/resetminer.sh
         ;;
     esac
