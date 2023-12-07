@@ -59,7 +59,7 @@ cd /root
 green "Cleaning up"
 rm *.tar.gz -rf
 sleep 10
-green "Adding Nodes{END}"
+green "Adding Nodes"
 /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
 /root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
@@ -92,10 +92,10 @@ green "Rebuilding blockchain"
 mv /root/evodb/ /root/.thoughtcore/evodb/
 mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
-green "Blockchain recovered{END}"
+green "Blockchain recovered"
 
 
-green "Starting Thoughtd Service{END}"
+green "Starting Thoughtd Service"
 systemctl start thoughtd
 red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
