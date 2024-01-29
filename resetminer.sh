@@ -84,8 +84,8 @@ rm /var/log/journal/* -r
 green "Logs removed"
 
 yellow "Cleaning APT resources"
-apt-get clean
-apt-get autoremove --purge
+apt-get clean -y
+apt-get autoremove --purge -y
 green "APT files cleaned"
 
 green "Downloading Bootstrap file"
