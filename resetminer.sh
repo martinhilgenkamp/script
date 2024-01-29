@@ -56,7 +56,7 @@ function white(){
 }
 cd /root
 
-green "Cleaning up"
+green "Adding Nodes"
 rm *.tar.gz -rf
 sleep 10
 green "Adding Nodes"
@@ -74,14 +74,19 @@ green "Adding Nodes"
 
 red "Stopping services"
 systemctl stop thoughtd
-green "Removing chain Files"
+yellow "Removing chain Files"
 rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
 green "Blockchain removed"
-green "Removing Journal logs"
+yellow "Removing Journal logs"
 rm /var/log/journal/*
 green "Logs removed"
+
+yellow "Cleaning APT resources"
+apt-get clean
+apt-get autoremove --purge
+green "APT files cleaned"
 
 green "Downloading Bootstrap file"
 
