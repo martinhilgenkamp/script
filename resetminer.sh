@@ -79,6 +79,9 @@ rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
 green "Blockchain removed"
+green "Removing Journal logs
+rm /var/log/journal/*
+green "Logs removed"
 
 green "Downloading Bootstrap file"
 
