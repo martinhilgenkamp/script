@@ -80,7 +80,7 @@ rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
 green "Blockchain removed"
 yellow "Removing Journal logs"
-rm /var/log/journal/*
+rm /var/log/journal/* -r
 green "Logs removed"
 
 yellow "Cleaning APT resources"
