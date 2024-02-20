@@ -4,13 +4,64 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+set +x
+function black(){
+    echo -e "\x1B[30m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[30m $($2) \x1B[0m"
+    fi
+}
+function red(){
+    echo -e "\x1B[31m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[31m $($2) \x1B[0m"
+    fi
+}
+function green(){
+    echo -e "\x1B[32m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[32m $($2) \x1B[0m"
+    fi
+}
+function yellow(){
+    echo -e "\x1B[33m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[33m $($2) \x1B[0m"
+    fi
+}
+function blue(){
+    echo -e "\x1B[34m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[34m $($2) \x1B[0m"
+    fi
+}
+function purple(){
+    echo -e "\x1B[35m $1 \x1B[0m \c"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[35m $($2) \x1B[0m"
+    fi
+}
+function cyan(){
+    echo -e "\x1B[36m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[36m $($2) \x1B[0m"
+    fi
+}
+function white(){
+
+    echo -e "\x1B[37m $1 \x1B[0m"
+    if [ ! -z "${2}" ]; then
+    echo -e "\x1B[33m $($2) \x1B[0m"
+    fi
+}
+
 FILE=/root/miner.conf
 if [ -f "$FILE" ]; then
     echo "$FILE exists."
     read -t 5 -p "Miner Config Exist on the system, oude instellingen gebruiken? [y/n]" yn
     case $yn in
                 [yY][eE][sS]|[yY])
-                echo "Oude miner.conf word hergebruikt"
+                green "Oude miner.conf word hergebruikt"
                 ;;
             [nN][oO]|[nN])
                         read -p "Waar moet de money heen ?" COINBASE
@@ -24,7 +75,7 @@ coinbase-addr = $COINBASE" > /root/miner.conf
                         #
                         ;;
         *)
-                echo "Oude miner.conf word hergebruikt"
+                green "Oude miner.conf word hergebruikt"
                 ;;
         esac
 else
@@ -40,7 +91,7 @@ coinbase-addr = $COINBASE" > /root/miner.conf
                         #
 fi
 #########################################
-/bin/sleep 5
+
 cd
 systemctl stop thoughtd
 systemctl stop miner
@@ -61,24 +112,26 @@ DEBIAN_FRONTEND=noninteractive apt autoclean -y
 sudo update-java-alternatives --set /usr/lib/jvm/java-1.21.0-openjdk-amd64
 #
 #
+red "Removing old installers"
 rm /root/thoughtcore-0.18.1 -r
 rm /root/snap -r
 rm /root/thoughtcore-0.18.1-x86_64-pc-linux-gnu.tar.gz -r
 rm /root/thoughtcore-0.18.2-x86_64-pc-linux-gnu.tar.gz
 rm /root/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
-sleep 1
+/bin/sleep 2
+green "Downloading new files"
 wget --no-check-certificate --content-disposition https://github.com/thoughtnetwork/thought-wallet/raw/master/linux/thought-0.18.3/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
+wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
+mv jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar miner.jar
 #
-sleep 2
+yellow "Extracting new files"
+/bin/sleep 2
 tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 /root/thoughtcore/bin/thoughtd -daemon
-sleep 20
-#
-wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
-#
-mv jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar miner.jar
+green "Waiting for thought deamon to spawn"
+/bin/sleep 25
 #
 ######################################
 #
@@ -89,7 +142,8 @@ rpcpassword=martin" > /root/.thoughtcore/thought.conf
 #################################
 #Installatie
 #Begin uit de root.
-mkdir services 
+green "Creating Services"
+mkdir services -p
 #Services maken
 #####################################################################################
 test -f /etc/systemd/system/thoughtd.service && rm /etc/systemd/system/thoughtd.service
@@ -196,12 +250,13 @@ systemctl daemon-reload
 systemctl enable thoughtd
 systemctl enable miner
 systemctl enable miner1
+green "Services have been setup"
 #######################################################################################
 #Allow Root login
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 
-sleep 15
+/bin/sleep 20
 
 
 /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
@@ -217,7 +272,7 @@ sleep 15
 
 
 
-read -t 5 -p "Reset Miner? [y/n]" yn
+read -t 10 -p "Reset Miner? [y/n]" yn
     case $yn in
         [yY][eE][sS]|[yY])
 		    /root/script/resetminer.sh
