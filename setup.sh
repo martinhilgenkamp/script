@@ -93,6 +93,7 @@ fi
 #########################################
 
 cd
+red "Stopping any mining services"
 systemctl stop thoughtd
 systemctl stop miner
 systemctl stop miner1
@@ -100,12 +101,16 @@ systemctl disable thoughtd
 systemctl disable miner
 systemctl disable miner1
 #
+green "Setting TimeZone to Europe/Amsterdam"
 timedatectl set-timezone Europe/Amsterdam
 timedatectl set-ntp on
+
+green "Updating system"
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install openjdk-21-jdk -y
 DEBIAN_FRONTEND=noninteractive apt-get purge cockpit -y
 DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
+red "Removing obsolete system files"
 DEBIAN_FRONTEND=noninteractive apt autoremove -y 
 DEBIAN_FRONTEND=noninteractive apt clean -y 
 DEBIAN_FRONTEND=noninteractive apt autoclean -y
