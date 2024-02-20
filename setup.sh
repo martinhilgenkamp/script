@@ -52,8 +52,13 @@ systemctl disable miner1
 timedatectl set-timezone Europe/Amsterdam
 timedatectl set-ntp on
 apt-get update
-apt-get install cockpit openjdk-11-jdk -y
+DEBIAN_FRONTEND=noninteractive apt-get install openjdk-21-jdk -y
+DEBIAN_FRONTEND=noninteractive apt-get purge cockpit -y
 DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
+DEBIAN_FRONTEND=noninteractive apt autoremove -y 
+DEBIAN_FRONTEND=noninteractive apt clean -y 
+DEBIAN_FRONTEND=noninteractive apt autoclean -y
+sudo update-java-alternatives --set /usr/lib/jvm/java-1.21.0-openjdk-amd64
 #
 #
 rm /root/thoughtcore-0.18.1 -r
