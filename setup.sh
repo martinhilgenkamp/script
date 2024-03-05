@@ -261,7 +261,7 @@ green "Services have been setup"
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 
-/bin/sleep 20
+/bin/sleep 45
 
 
 /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
