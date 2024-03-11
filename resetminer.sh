@@ -4,6 +4,9 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+# Exit the script if any command fails
+set -e
+
 set +x
 function black(){
     echo -e "\x1B[30m $1 \x1B[0m"
@@ -116,6 +119,12 @@ wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
 
 green "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
+
+# Check the exit status of the tar command
+if [ $? -ne 0 ]; then
+  red "Error: Tar command failed. Disk Full??"
+  exit 1
+fi
 
 green "Rebuilding blockchain"
 mv /root/evodb/ /root/.thoughtcore/evodb/
