@@ -85,21 +85,21 @@ systemctl stop thoughtd
 yellow "Removing chain Files and old archives"
 rm /root/*.tar.gz -rf
 
-$directory /root/.thoughtcore/evodb/
+$directory = "/root/.thoughtcore/evodb/"
 if [ -d "$directory" ]; then
     rm -r "$directory"
     echo "Directory $directory removed."
 else
     echo "Directory $directory does not exist. No removal needed."
 fi
-$directory /root/.thoughtcore/blocks/
+$directory = "/root/.thoughtcore/blocks/"
 if [ -d "$directory" ]; then
     rm -r "$directory"
     echo "Directory $directory removed."
 else
     echo "Directory $directory does not exist. No removal needed."
 fi
-$directory = /root/.thoughtcore/chainstate/
+$directory = "/root/.thoughtcore/chainstate/"
 if [ -d "$directory" ]; then
     rm -r "$directory"
     echo "Directory $directory removed."
