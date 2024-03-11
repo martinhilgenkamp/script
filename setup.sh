@@ -325,26 +325,22 @@ read -t 10 -p "Reset Miner? [y/n]" yn
 		    /root/script/resetminer.sh
         ;;
         [nN][oO]|[nN])
-            echo "Miner update complete, laten de mine goden met u zijn!"
-			systemctl start thoughtd
-			systemctl start miner
-			systemctl start miner1
-   			/bin/sleep 45
-			/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
-			/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
-		;;
-        *)
-			echo "" 
+            #Start and check if the process is running
+      	    systemctl start thoughtd
+	    systemctl start miner
+	    systemctl start miner1
+   	    /bin/sleep 45
+	    if pgrep -x "thoughtd" > /dev/null; then
+    		green "Thought is running again"
+	    else
+    		# If the process is not running, print a message
+    		yellow "Process 'thoughtd' is not running rebooting system."
+    		reboot now
+	    fi
+	    ;;
+        *) 
 	    /bin/sleep 25
-     	    echo "Niet begrepen vaar eigen wind wel."
+     	    yellow "Niet begrepen vaar eigen wind wel."
 	    /root/script/resetminer.sh
         ;;
     esac
