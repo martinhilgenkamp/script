@@ -84,7 +84,20 @@ rm /var/log/journal/* -r
 green "Logs removed"
 
 yellow "Cleaning APT resources"
-apt purge snapd -y
+# Check if snapd is installed
+if command -v snap &>/dev/null; then
+    yellow "Snapd is installed. Removing snapd..."
+    
+    # Remove snapd
+    sudo apt-get purge -y snapd
+
+    # Clean up dependencies
+    sudo apt-get autoremove -y
+
+    red "Snapd removed successfully."
+else
+    green "Snapd is not installed on this system."
+fi
 apt-get clean -y
 apt-get autoremove --purge -y
 green "APT files cleaned"
