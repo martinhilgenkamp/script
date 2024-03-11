@@ -276,19 +276,19 @@ touch /root/services/register-dns
 echo "#!/bin/bash
 
 # Get the hostname
-hostname=$(hostname)
+hostname=\$(hostname)
 
 # Get the IP address
-ip_address=$(hostname -I | awk '{print $1}')
+ip_address=\$(hostname -I | awk '{print $1}')
 
 # Use the retrieved hostname and IP address in the nsupdate script
 nsupdate <<EOF
 server 192.168.222.50
-update delete $hostname.miners.local A
-update add $hostname.miners.local 86400 A $ip_address
+update delete \$hostname.miners.local A
+update add \$hostname.miners.local 86400 A \$ip_address
 send
 EOF" > /root/services/register-dns
-
+chmod +x services/register-dns
 ##########################################################################################
 #Execute rechten goed zetten (is beetje open maar werkt)
 chmod +x /root/services/* -R
