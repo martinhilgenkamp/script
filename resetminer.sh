@@ -133,9 +133,20 @@ green "APT files cleaned"
 
 green "Downloading Bootstrap file"
 ##############################################################################################
-# First location
-url1="http://192.168.222.35/thought-chain.tar.gz"
-# Second location
+
+# Check if the IP address is in the 192.168.222.0 subnet
+if [[ $ip_address == 192.168.222.* ]]; then
+    # Use url1
+    url1="http://192.168.222.35/thought-chain.tar.gz"
+elif [[ $ip_address == 192.168.250.* ]]; then
+    # Use url in the 250 (proxy need to be setup)
+    url1="http://192.168.222.35/thought-chain.tar.gz"
+else
+    #unknown network url1 is also the fallback
+    url1="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
+fi 
+
+# Fallback to internet source
 url2="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
 
 local_temp_path="/root/thought-chain.temp.tar.gz"
