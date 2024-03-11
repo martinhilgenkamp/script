@@ -132,23 +132,27 @@ apt-get autoremove --purge -y
 green "APT files cleaned"
 
 green "Downloading Bootstrap file"
+##############################################################################################
+# First location
+url1="http://192.168.222.35/thought-chain.tar.gz"
+# Second location
+url2="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
 
-wget --connect-timeout=5 --waitretry=1 http://192.168.222.135/thought-chain.tar.gz
+local_temp_path="/root/thought-chain.temp.tar.gz"
+local_final_path="/root/thought-chain.tar.gz"
 
-url="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
-local_path="/root/thought-chain.tar.gz"
+# Try the first location, and if it fails, try the second one
+wget --connect-timeout=5 --waitretry=1 -O "$local_temp_path" "$url1" || wget --connect-timeout=5 --waitretry=1 -O "$local_temp_path" "$url2"
 
-# Download the file only if it's newer or missing locally
-wget -N "$url"
-
-# Check if the file exists locally
-if [ -e "$local_path" ]; then
-    echo "File exists: $local_path"
+# Check if the download was successful
+if [ -e "$local_temp_path" ]; then
+    # Move the temporary file to the final location
+    mv "$local_temp_path" "$local_final_path"
+    echo "Download successful. File moved to: $local_final_path"
 else
-    echo "File does not exist: $local_path"
+    echo "Download failed. No file available."
 fi
-#wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
-
+##############################################################################3#################
 green "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
 
