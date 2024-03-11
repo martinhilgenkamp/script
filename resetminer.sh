@@ -134,6 +134,9 @@ sleep 40
 if pgrep -x "thoughtd" > /dev/null; then
     # If the process is running, kill it
     green "Thought is running again"
+    Green "Starting Miners"
+    systemctl start miner1
+    systemctl start miner
 else
     # If the process is not running, print a message
     yellow "Process 'thoughtd' is not running rebooting system."
