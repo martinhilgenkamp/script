@@ -312,12 +312,20 @@ systemctl enable miner1
 systemctl enable dns-registration
 green "Services have been setup"
 #######################################################################################
+green "------------------------------------------"
+
 #Allow Root login
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-
+#Add Public key for root login
 touch /root/.ssh/authorized_keys
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsizx2h7YR7Y6/Q22x5x0impRYgYCTdd0pvoNrcw7nGsAjHuROlkedSzqLiE76/mvybJ9AfAzOHVMN0ycYUmaqdrkbOLmb2AZFbT00PyOs2UqHR9hMH5vc6rFrSTHbOP1hQ4cdInDZ2DNUB4pyYmbl/S4Of8IbJOPx45Ypk1FtyW2LA9N1zqZv9QHcnyoS5IPJ5jHdpt5PFDYW3YhslfuUiDT4KbqwXkJMWKYAsMQF0RdDsXDAT52jrdonH6dBdBPqNgfrUwpa3mD4sgRfR6DaYCU1Omoc/cJT4FvRA6eEa/GChwFsytv9nc7kSe3bu4RBCypIQgRqy5nmpTDRi/mL rsa-key-20240223" > /root/.ssh/authorized_keys
+green "Credentials have been added"
+
+########################################################################################
+systemctl start dns-registration
+green "------------------------------------------"
+green "System is registered in DNS"
 
 read -t 10 -p "Reset Miner? [y/n]" yn
     case $yn in
