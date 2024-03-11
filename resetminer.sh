@@ -114,8 +114,21 @@ green "APT files cleaned"
 
 green "Downloading Bootstrap file"
 
-wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
-#wget http://192.168.250.167/thought-chain.tar.gz
+wget http://192.168.222.135/thought-chain.tar.gz
+
+url="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
+local_path="/root/thought-chain.tar.gz"
+
+# Download the file only if it's newer or missing locally
+wget -N "$url"
+
+# Check if the file exists locally
+if [ -e "$local_path" ]; then
+    echo "File exists: $local_path"
+else
+    echo "File does not exist: $local_path"
+fi
+#wget https://idea-01.insufficient-light.com/data/thought-chain.tar.gz
 
 green "Extracting Bootstrap"
 tar -zxf thought-chain.tar.gz
