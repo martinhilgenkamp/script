@@ -185,12 +185,12 @@ systemctl start thoughtd
 red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
 green "--------------------------"
-green "success"
 sleep 40
 if pgrep -x "thoughtd" > /dev/null; then
     # If the process is running, kill it
     green "Thought is running again"
-    Green "Starting Miners"
+    green "--------------------------"
+    green "Starting Miners"
     systemctl start miner1
     systemctl start miner
 else
