@@ -84,9 +84,28 @@ red "Stopping services"
 systemctl stop thoughtd
 yellow "Removing chain Files and old archives"
 rm /root/*.tar.gz -rf
-rm /root/.thoughtcore/evodb/ -r
-rm /root/.thoughtcore/blocks/ -r
-rm /root/.thoughtcore/chainstate/ -r
+
+$directory /root/.thoughtcore/evodb/
+if [ -d "$directory" ]; then
+    rm -r "$directory"
+    echo "Directory $directory removed."
+else
+    echo "Directory $directory does not exist. No removal needed."
+fi
+$directory /root/.thoughtcore/blocks/
+if [ -d "$directory" ]; then
+    rm -r "$directory"
+    echo "Directory $directory removed."
+else
+    echo "Directory $directory does not exist. No removal needed."
+fi
+$directory = /root/.thoughtcore/chainstate/
+if [ -d "$directory" ]; then
+    rm -r "$directory"
+    echo "Directory $directory removed."
+else
+    echo "Directory $directory does not exist. No removal needed."
+fi
 
 green "Blockchain removed"
 yellow "Removing Journal logs"
