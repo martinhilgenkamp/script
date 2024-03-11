@@ -139,6 +139,16 @@ green "Waiting for thought deamon to spawn"
 /bin/sleep 45
 #
 ######################################
+# Check if the process "thoughtd" is running
+if pgrep -x "thoughtd" > /dev/null; then
+    # If the process is running, kill it
+    red "Killing the 'thoughtd' process..."
+    pkill -x "thoughtd"
+    green "Process 'thoughtd' killed."
+else
+    # If the process is not running, print a message
+    yellow "Process 'thoughtd' is not running."
+fi
 #
 #
 echo "server=1
