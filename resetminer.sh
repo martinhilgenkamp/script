@@ -108,9 +108,9 @@ else
 fi
 
 green "Blockchain removed"
-yellow "Removing Journal logs"
-rm /var/log/journal/* -r
-green "Logs removed"
+yellow "Setting Journal logs to 3 days"
+journalctl --vacuum-time=3d
+green "Logs limit set"
 
 yellow "Cleaning APT resources"
 # Check if snapd is installed
