@@ -174,6 +174,30 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/thoughtd.service
+#####################################################################################
+test -f /etc/systemd/system/dns-registration.service && rm /etc/systemd/system/dns-registration.service
+touch /etc/systemd/system/dns-registration.service
+echo "[Unit]
+Description=DNS Registration
+[Service]
+User=root
+# The configuration file application.properties should be here:
+
+#change this to your workspace
+WorkingDirectory=/root
+
+#path to executable. 
+#executable is a bash script which calls jar file
+ExecStartPre=/bin/sleep 30
+ExecStart=/root/services/register-dns
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/dns-registration.service
 #######################################################################################
 test -f /etc/systemd/system/miner.service && rm /etc/systemd/system/miner.service
 touch /etc/systemd/system/miner.service
@@ -246,6 +270,26 @@ sudo rm /root/.thoughtcore/chainstate/ -r
 systemctl start thoughtd" > /usr/bin/resetminer
 chmod +x /usr/bin/resetminer
 ##########################################################################################
+#DNS Instellen
+test -f /root/services/register-dns && rm /root/services/register-dns
+touch /root/services/register-dns
+echo "#!/bin/bash
+
+# Get the hostname
+hostname=$(hostname)
+
+# Get the IP address
+ip_address=$(hostname -I | awk '{print $1}')
+
+# Use the retrieved hostname and IP address in the nsupdate script
+nsupdate <<EOF
+server 192.168.222.50
+update delete $hostname.miners.local A
+update add $hostname.miners.local 86400 A $ip_address
+send
+EOF" > /root/services/register-dns
+
+##########################################################################################
 #Execute rechten goed zetten (is beetje open maar werkt)
 chmod +x /root/services/* -R
 chmod +x /usr/bin/getinfo
@@ -255,6 +299,7 @@ systemctl daemon-reload
 systemctl enable thoughtd
 systemctl enable miner
 systemctl enable miner1
+systemctl enable dns-registration
 green "Services have been setup"
 #######################################################################################
 #Allow Root login
