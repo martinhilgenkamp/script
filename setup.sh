@@ -136,7 +136,7 @@ tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 /root/thoughtcore/bin/thoughtd -daemon
 green "Waiting for thought deamon to spawn"
-/bin/sleep 25
+/bin/sleep 45
 #
 ######################################
 #
@@ -261,21 +261,8 @@ green "Services have been setup"
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 
-/bin/sleep 45
-
-
-/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
-
-
+touch /root/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsizx2h7YR7Y6/Q22x5x0impRYgYCTdd0pvoNrcw7nGsAjHuROlkedSzqLiE76/mvybJ9AfAzOHVMN0ycYUmaqdrkbOLmb2AZFbT00PyOs2UqHR9hMH5vc6rFrSTHbOP1hQ4cdInDZ2DNUB4pyYmbl/S4Of8IbJOPx45Ypk1FtyW2LA9N1zqZv9QHcnyoS5IPJ5jHdpt5PFDYW3YhslfuUiDT4KbqwXkJMWKYAsMQF0RdDsXDAT52jrdonH6dBdBPqNgfrUwpa3mD4sgRfR6DaYCU1Omoc/cJT4FvRA6eEa/GChwFsytv9nc7kSe3bu4RBCypIQgRqy5nmpTDRi/mL rsa-key-20240223" > /root/services/miner-service
 
 read -t 10 -p "Reset Miner? [y/n]" yn
     case $yn in
@@ -287,6 +274,17 @@ read -t 10 -p "Reset Miner? [y/n]" yn
 			systemctl start thoughtd
 			systemctl start miner
 			systemctl start miner1
+   			/bin/sleep 45
+			/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+			/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
 		;;
         *)
 			echo "" 
