@@ -84,6 +84,7 @@ rm /var/log/journal/* -r
 green "Logs removed"
 
 yellow "Cleaning APT resources"
+apt purge snapd -y
 apt-get clean -y
 apt-get autoremove --purge -y
 green "APT files cleaned"
