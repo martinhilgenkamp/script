@@ -55,29 +55,36 @@ function white(){
     fi
 }
 cd /root
+# Check if the process "thoughtd" is running
+if pgrep -x "thoughtd" > /dev/null; then
+    # If the process is running, kill it
+    green "Adding Nodes"
+    /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+else
+    # If the process is not running, print a message
+    yellow "Process 'thoughtd' is not running."
+fi
 
-green "Adding Nodes"
-rm *.tar.gz -rf
+
 sleep 10
-green "Adding Nodes"
-/root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
-/root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
-
 
 red "Stopping services"
 systemctl stop thoughtd
-yellow "Removing chain Files"
+yellow "Removing chain Files and old archives"
+rm /root/*.tar.gz -rf
 rm /root/.thoughtcore/evodb/ -r
 rm /root/.thoughtcore/blocks/ -r
 rm /root/.thoughtcore/chainstate/ -r
+
 green "Blockchain removed"
 yellow "Removing Journal logs"
 rm /var/log/journal/* -r
@@ -123,7 +130,12 @@ red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
 green "--------------------------"
 green "success"
-
-
-sleep 10
-reboot now
+sleep 40
+if pgrep -x "thoughtd" > /dev/null; then
+    # If the process is running, kill it
+    green "Thought is running again"
+else
+    # If the process is not running, print a message
+    yellow "Process 'thoughtd' is not running rebooting system."
+    reboot now
+fi
