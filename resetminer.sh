@@ -133,7 +133,7 @@ green "APT files cleaned"
 
 green "Downloading Bootstrap file"
 
-wget --connect-timeout=5 http://192.168.222.135/thought-chain.tar.gz
+wget --connect-timeout=5 --waitretry=1 http://192.168.222.135/thought-chain.tar.gz
 
 url="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
 local_path="/root/thought-chain.tar.gz"
