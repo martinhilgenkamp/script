@@ -133,12 +133,17 @@ green "APT files cleaned"
 
 green "Downloading Bootstrap file"
 ##############################################################################################
+# Get the machine's IP address
+ip_address=$(ip route get 1 | awk '{print $7}')
 
 # Check if the IP address is in the 192.168.222.0 subnet
 if [[ $ip_address == 192.168.222.* ]]; then
     # Use url1
     url1="http://192.168.222.35/thought-chain.tar.gz"
-elif [[ $ip_address == 192.168.25*.* ]]; then
+elif [[ $ip_address == 192.168.250.* ]]; then
+    # Use url in the 250 (proxy need to be setup)
+    url1="http://192.168.251.50/thought-chain.tar.gz"
+elif [[ $ip_address == 192.168.251.* ]]; then
     # Use url in the 250 (proxy need to be setup)
     url1="http://192.168.251.50/thought-chain.tar.gz"
 else
