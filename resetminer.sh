@@ -138,9 +138,9 @@ green "Downloading Bootstrap file"
 if [[ $ip_address == 192.168.222.* ]]; then
     # Use url1
     url1="http://192.168.222.35/thought-chain.tar.gz"
-elif [[ $ip_address == 192.168.250.* ]]; then
+elif [[ $ip_address == 192.168.25*.* ]]; then
     # Use url in the 250 (proxy need to be setup)
-    url1="http://192.168.222.35/thought-chain.tar.gz"
+    url1="http://192.168.251.50/thought-chain.tar.gz"
 else
     #unknown network url1 is also the fallback
     url1="https://idea-01.insufficient-light.com/data/thought-chain.tar.gz"
@@ -173,18 +173,18 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-green "Rebuilding blockchain"
+yellow "Rebuilding blockchain"
 mv /root/evodb/ /root/.thoughtcore/evodb/
 mv /root/blocks/ /root/.thoughtcore/blocks/
 mv /root/chainstate/ /root/.thoughtcore/chainstate/
 green "Blockchain recovered"
 
 
-green "Starting Thoughtd Service"
+yellow "Starting Thoughtd Service"
 systemctl start thoughtd
 red "Removing bootstrap file"
 rm /root/thought-chain.tar.gz -f
-green "--------------------------"
+yellow "--------------------------"
 sleep 40
 if pgrep -x "thoughtd" > /dev/null; then
     # If the process is running, kill it
@@ -193,6 +193,7 @@ if pgrep -x "thoughtd" > /dev/null; then
     green "Starting Miners"
     systemctl start miner1
     systemctl start miner
+    htop
 else
     # If the process is not running, print a message
     yellow "Process 'thoughtd' is not running rebooting system."
