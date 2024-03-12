@@ -255,6 +255,18 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/miner1.service
 #########################################################################################
+test -f /etc/systemd/system/gitpull.service && rm /etc/systemd/system/gitpull.service
+touch /etc/systemd/system/gitpull.service
+echo "[Unit]
+Description=Git Pull on Boot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/git -C /root/script/ pull
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/gitpull.service
+#########################################################################################
 test -f /root/services/thoughtd-service && rm /root/services/thoughtd-service
 touch /root/services/thoughtd-service
 echo "#!/bin/bash
@@ -310,6 +322,7 @@ systemctl enable thoughtd
 systemctl enable miner
 systemctl enable miner1
 systemctl enable dns-registration
+systemctl enable gitpull.service
 green "Services have been setup"
 #######################################################################################
 green "------------------------------------------"
