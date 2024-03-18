@@ -339,7 +339,8 @@ green "Credentials have been added"
 systemctl start dns-registration
 green "------------------------------------------"
 green "System is registered in DNS"
-
+green "------------------------------------------"
+echo ""
 read -t 10 -p "Reset Miner? [y/n]" yn
     case $yn in
         [yY][eE][sS]|[yY])
