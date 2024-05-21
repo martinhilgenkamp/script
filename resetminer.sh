@@ -60,18 +60,9 @@ function white(){
 cd /root
 # Check if the process "thoughtd" is running
 if pgrep -x "thoughtd" > /dev/null; then
-    # If the process is running, kill it
-    green "Adding Nodes"
-    /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
-    /root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+    # If it is running, kill the process
+    pkill -x "thoughtd"
+    red "Process 'thoughtd' has been killed."
 else
     # If the process is not running, print a message
     yellow "Process 'thoughtd' is not running."
@@ -194,6 +185,19 @@ sleep 40
 if pgrep -x "thoughtd" > /dev/null; then
     # If the process is running, kill it
     green "Thought is running again"
+    green "--------------------------"
+    yellow "Adding Nodes"
+    /root/thoughtcore/bin/thought-cli addnode idea-01.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-02.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-03.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-04.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-05.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-06.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-07.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-08.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-09.insufficient-light.com add
+    /root/thoughtcore/bin/thought-cli addnode idea-10.insufficient-light.com add
+    green "Nodes added"
     green "--------------------------"
     green "Starting Miners"
     systemctl start miner1
