@@ -126,13 +126,13 @@ rm /root/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
 #
 /bin/sleep 2
 green "Downloading new files"
-wget --no-check-certificate --content-disposition https://github.com/thoughtnetwork/thought-wallet/raw/master/linux/thought-0.18.3/thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
+wget --no-check-certificate --content-disposition https://github.com/thoughtnetwork/thought-wallet/raw/refs/heads/master/linux/thought-0.18.4/thoughtcore-0.18.4-x86_64-pc-linux-gnu.tar.gz
 wget https://github.com/thoughtnetwork/jtminer-builds/raw/master/jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar
 mv jtminer-0.4.1-SNAPSHOT-jar-with-dependencies.jar miner.jar
 #
 yellow "Extracting new files"
 /bin/sleep 2
-tar -zxvf thoughtcore-0.18.3-x86_64-pc-linux-gnu.tar.gz
+tar -zxvf thoughtcore-0.18.4-x86_64-pc-linux-gnu.tar.gz
 #
 /root/thoughtcore/bin/thoughtd -daemon
 green "Waiting for thought deamon to spawn"
